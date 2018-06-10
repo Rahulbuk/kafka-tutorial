@@ -28,7 +28,6 @@ public class BasicKafkaConsumerApp {
 
         try {
             while (true) {
-
                 ConsumerRecords<String, String> records = consumer.poll(TIMEOUT);
                 if (records.count() > 0) {
                     LOGGER.info("Poll records: " + records.count());
@@ -39,7 +38,6 @@ public class BasicKafkaConsumerApp {
                         LOGGER.info(line);
                     }
                 }
-
                 //consumer.commitAsync();
             }
         } catch (Exception e) {
