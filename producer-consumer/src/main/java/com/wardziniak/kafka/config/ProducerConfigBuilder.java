@@ -9,20 +9,18 @@ import java.util.Properties;
 /**
  * Created by wardziniak on 09.06.18.
  */
-public class ProducerConfigBuilder implements ConfigBuilder {
+public class ProducerConfigBuilder extends ConfigBuilder {
 
-    private static final String BOOTSTRAP_SERVERS_DEFAULT = "localhost:9092";
     private static final String KEY_SERIALIZER_DEFAULT = StringSerializer.class.getCanonicalName();
     private static final String VALUE_SERIALIZER_DEFAULT = StringSerializer.class.getCanonicalName();
 
-    private Optional<String> bootstrapServer = Optional.empty();
     private Optional<String> keySerializer = Optional.empty();
     private Optional<String> valueSerializer = Optional.empty();
 
-    public ProducerConfigBuilder withServer(String bootstrapServer) {
-        this.bootstrapServer = Optional.ofNullable(bootstrapServer);
-        return this;
-    }
+//    public ProducerConfigBuilder withServer(String bootstrapServer) {
+//        this.bootstrapServer = Optional.ofNullable(bootstrapServer);
+//        return this;
+//    }
 
     private ProducerConfigBuilder withKeySerializer(String keySerialize) {
         this.keySerializer = Optional.ofNullable(keySerialize);
@@ -41,7 +39,7 @@ public class ProducerConfigBuilder implements ConfigBuilder {
     @Override
     public Properties buildConfig() {
         Properties properties = new Properties();
-        properties.setProperty(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServer.orElse(BOOTSTRAP_SERVERS_DEFAULT));
+        properties.setProperty(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers.orElse(BOOTSTRAP_SERVERS_DEFAULT));
         properties.setProperty(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, keySerializer.orElse(KEY_SERIALIZER_DEFAULT));
         properties.setProperty(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, valueSerializer.orElse(VALUE_SERIALIZER_DEFAULT));
         return properties;
