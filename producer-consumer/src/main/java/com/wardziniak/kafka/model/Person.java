@@ -40,4 +40,9 @@ public class Person {
     public void setAddress(Address address) {
         this.address = address;
     }
+
+    @Override
+    public String toString() {
+        return String.format("Person(id=%d, name=%s, address%s)", id, name, address);
+    }
 }

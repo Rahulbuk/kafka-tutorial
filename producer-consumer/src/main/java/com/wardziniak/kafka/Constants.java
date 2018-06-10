@@ -6,5 +6,6 @@ package com.wardziniak.kafka;
 public class Constants {
 
     public final static String BASIC_TOPIC = "someTopic";
+    public final static String PEOPLE_TOPIC = "people";
     public final static long TIMEOUT = 10000;
 }

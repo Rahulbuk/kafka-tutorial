@@ -1,11 +1,12 @@
-package com.wardziniak.kafka.basic;
+package com.wardziniak.kafka.serialization;
 
 import com.wardziniak.kafka.Constants;
 import com.wardziniak.kafka.config.ProducerConfigBuilder;
 import com.wardziniak.kafka.model.Person;
-import com.wardziniak.kafka.serialization.GenericSerializer;
+import com.wardziniak.kafka.model.PersonFactory;
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerRecord;
+import org.apache.kafka.common.serialization.StringSerializer;
 import org.apache.log4j.Logger;
 
 import java.util.Properties;
@@ -13,15 +14,18 @@ import java.util.Properties;
 /**
  * Created by wardziniak on 09.06.18.
  */
-public class BasicKafkaProducerApp {
+public class KafkaProducerWithCustomSerdesApp {
 
-    private static final Logger LOGGER = Logger.getLogger(BasicKafkaProducerApp.class);
+    private static final Logger LOGGER = Logger.getLogger(KafkaProducerWithCustomSerdesApp.class);
 
-    private static final String outputTopic = Constants.BASIC_TOPIC;
+    private static final String outputTopic = Constants.PEOPLE_TOPIC;
 
     public static void main(String[] args) {
         Properties producerConfig = new ProducerConfigBuilder().buildConfig();
-        KafkaProducer<String, String> producer = new KafkaProducer<String, String>(producerConfig);
+        KafkaProducer<String, Person> producer = new KafkaProducer<>(
+                producerConfig,
+                new StringSerializer(),
+                new GenericSerializer<Person>());
 
 
         LOGGER.info("start");
@@ -29,9 +33,8 @@ public class BasicKafkaProducerApp {
         try {
 
             for (int i = 0; ; i++) {
-                String key = "" + i % 3;
-                String value = "someValue" + i;
-                ProducerRecord<String, String> record = new ProducerRecord<String, String>(outputTopic, key, value);
+                Person person = PersonFactory.getPerson(i);
+                ProducerRecord<String, Person> record = new ProducerRecord<>(outputTopic, Integer.valueOf(i).toString(), person);
                 producer.send(record);
                 if (i % 11 == 0) {
                     LOGGER.info("Sent 11 messages");
@@ -44,5 +47,6 @@ public class BasicKafkaProducerApp {
             LOGGER.error("Some error occurred during sending", e);
             producer.flush();
         }
+
     }
 }
