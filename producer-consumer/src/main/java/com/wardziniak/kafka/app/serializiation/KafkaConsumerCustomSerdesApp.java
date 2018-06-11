@@ -1,8 +1,9 @@
-package com.wardziniak.kafka.serialization;
+package com.wardziniak.kafka.app.serializiation;
 
 import com.wardziniak.kafka.Constants;
 import com.wardziniak.kafka.config.ConsumerConfigBuilder;
 import com.wardziniak.kafka.model.Person;
+import com.wardziniak.kafka.serialization.GenericDeserializer;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
@@ -17,7 +18,7 @@ import static com.wardziniak.kafka.Constants.TIMEOUT;
 /**
  * Created by wardziniak on 09.06.18.
  */
-public class KafkaConsumerWithCustomSerdesApp {
+public class KafkaConsumerCustomSerdesApp {
 
     private static final Logger LOGGER = Logger.getLogger(KafkaProducerWithCustomSerdesApp.class);
 

@@ -1,11 +1,13 @@
-package com.wardziniak.kafka.basic;
+package com.wardziniak.kafka.app.partitioner;
 
 import com.wardziniak.kafka.Constants;
 import com.wardziniak.kafka.config.ConsumerConfigBuilder;
-import com.wardziniak.kafka.config.ProducerConfigBuilder;
+import com.wardziniak.kafka.model.Person;
+import com.wardziniak.kafka.serialization.GenericDeserializer;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
+import org.apache.kafka.common.serialization.StringDeserializer;
 import org.apache.log4j.Logger;
 
 import java.util.Collections;
@@ -16,23 +18,26 @@ import static com.wardziniak.kafka.Constants.TIMEOUT;
 /**
  * Created by wardziniak on 09.06.18.
  */
-public class BasicKafkaConsumerApp {
+public class KafkaConsumerWithCustomSerdesApp {
 
-    private static final Logger LOGGER = Logger.getLogger(BasicKafkaProducerApp.class);
+    private static final Logger LOGGER = Logger.getLogger(KafkaProducerWithCustomPartitionerApp.class);
 
     public static void main(String[] args) {
 
         Properties consumerConfig = new ConsumerConfigBuilder().buildConfig();
-        KafkaConsumer<String, String> consumer = new KafkaConsumer<>(consumerConfig);
-        consumer.subscribe(Collections.singletonList(Constants.BASIC_TOPIC));
+        KafkaConsumer<String, Person> consumer = new KafkaConsumer<>(
+                consumerConfig,
+                new StringDeserializer(),
+                new GenericDeserializer<>(Person.class));
+        consumer.subscribe(Collections.singletonList(Constants.PEOPLE_TOPIC));
 
         try {
             while (true) {
-                ConsumerRecords<String, String> records = consumer.poll(TIMEOUT);
+                ConsumerRecords<String, Person> records = consumer.poll(TIMEOUT);
                 if (records.count() > 0) {
                     LOGGER.info("Poll records: " + records.count());
 
-                    for (ConsumerRecord<String, String> record : records) {
+                    for (ConsumerRecord<String, Person> record : records) {
                         String line = String.format("Received Message topic = %s, partition = %s, offset = %d, key = %s, value = %s\n",
                                 record.topic(), record.partition(), record.offset(), record.key(), record.value());
                         LOGGER.info(line);
@@ -41,7 +46,7 @@ public class BasicKafkaConsumerApp {
                 //consumer.commitAsync();
             }
         } catch (Exception e) {
-            LOGGER.error("Some error...", e);
+            LOGGER.error("Some error during retrieving messages", e);
         } finally {
             //consumer.commitSync();
             consumer.close();
