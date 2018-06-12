@@ -33,8 +33,8 @@ public class KafkaProducerWithCustomPartitionerApp {
                 Person person = PersonFactory.getPerson(i);
                 ProducerRecord<String, Person> record = new ProducerRecord<>(outputTopic, Integer.valueOf(i).toString(), person);
                 producer.send(record);
-                if (i % 11 == 0) {
-                    LOGGER.info("Sent 11 messages");
+                if (i % 5 == 0) {
+                    LOGGER.info("Sent 5 messages");
                     Thread.sleep(1500);
                 }
             }
