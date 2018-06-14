@@ -23,6 +23,7 @@
     <!--Scala-->
     <scala.version>[2.12.5]</scala.version>
     <scala.binary.version>2.11</scala.binary.version>
+    <tutorial.version>1.0-SNAPSHOT</tutorial.version>
   </properties>
 
   <dependencyManagement>
