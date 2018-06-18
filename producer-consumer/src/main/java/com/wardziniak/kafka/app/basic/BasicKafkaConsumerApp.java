@@ -37,12 +37,11 @@ public class BasicKafkaConsumerApp {
                         LOGGER.info(line);
                     }
                 }
-                //consumer.commitAsync();
             }
         } catch (Exception e) {
             LOGGER.error("Some error...", e);
         } finally {
-            //consumer.commitSync();
+            consumer.commitSync();
             consumer.close();
         }
     }
