@@ -43,12 +43,10 @@ public class KafkaConsumerCustomSerdesApp {
                         LOGGER.info(line);
                     }
                 }
-                //consumer.commitAsync();
             }
         } catch (Exception e) {
             LOGGER.error("Some error during retrieving messages", e);
         } finally {
-            //consumer.commitSync();
             consumer.close();
         }
     }

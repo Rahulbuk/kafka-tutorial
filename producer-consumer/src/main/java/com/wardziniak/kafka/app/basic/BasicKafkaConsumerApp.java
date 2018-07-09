@@ -17,7 +17,7 @@ import static com.wardziniak.kafka.Constants.TIMEOUT;
  */
 public class BasicKafkaConsumerApp {
 
-    private static final Logger LOGGER = Logger.getLogger(BasicKafkaProducerApp.class);
+    private static final Logger LOGGER = Logger.getLogger(BasicKafkaConsumerApp.class);
 
     public static void main(String[] args) {
 

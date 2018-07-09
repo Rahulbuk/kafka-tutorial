@@ -2,7 +2,6 @@ package com.wardziniak.kafka.config;
 
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;
-import org.apache.kafka.common.serialization.StringSerializer;
 
 import java.util.Optional;
 import java.util.Properties;

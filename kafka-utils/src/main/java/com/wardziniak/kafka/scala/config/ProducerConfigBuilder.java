@@ -1,4 +1,4 @@
-package com.wardziniak.kafka.config;
+package com.wardziniak.kafka.scala.config;
 
 import org.apache.kafka.clients.producer.Partitioner;
 import org.apache.kafka.clients.producer.ProducerConfig;
