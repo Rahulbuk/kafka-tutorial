@@ -2,8 +2,8 @@ package com.wardziniak.kafka.app.partitioner;
 
 import com.wardziniak.kafka.Constants;
 import com.wardziniak.kafka.config.ConsumerConfigBuilder;
-import com.wardziniak.kafka.model.Person;
 import com.wardziniak.kafka.serialization.GenericDeserializer;
+import com.wardziniak.kafka.utils.model.Person;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
 import org.apache.kafka.clients.consumer.KafkaConsumer;

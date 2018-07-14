@@ -2,10 +2,9 @@ package com.wardziniak.kafka.app.partitioner;
 
 import com.wardziniak.kafka.Constants;
 import com.wardziniak.kafka.config.ProducerConfigBuilder;
-import com.wardziniak.kafka.model.Person;
-import com.wardziniak.kafka.model.PersonFactory;
 import com.wardziniak.kafka.partitioner.CityPartitioner;
 import com.wardziniak.kafka.serialization.GenericSerializer;
+import com.wardziniak.kafka.utils.model.Person;
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerRecord;
 import org.apache.kafka.common.serialization.StringSerializer;
@@ -30,7 +29,7 @@ public class KafkaProducerWithCustomPartitionerApp {
                 new GenericSerializer<Person>());
         try {
             for (int i = 0; ; i++) {
-                Person person = PersonFactory.getPerson(i);
+                Person person = Person.apply(i);
                 ProducerRecord<String, Person> record = new ProducerRecord<>(outputTopic, Integer.valueOf(i).toString(), person);
                 producer.send(record);
                 if (i % 5 == 0) {

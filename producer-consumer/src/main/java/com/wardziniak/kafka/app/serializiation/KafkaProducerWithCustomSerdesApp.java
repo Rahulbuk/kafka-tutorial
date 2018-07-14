@@ -2,9 +2,8 @@ package com.wardziniak.kafka.app.serializiation;
 
 import com.wardziniak.kafka.Constants;
 import com.wardziniak.kafka.config.ProducerConfigBuilder;
-import com.wardziniak.kafka.model.Person;
-import com.wardziniak.kafka.model.PersonFactory;
 import com.wardziniak.kafka.serialization.GenericSerializer;
+import com.wardziniak.kafka.utils.model.Person;
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerRecord;
 import org.apache.kafka.common.serialization.StringSerializer;
@@ -27,14 +26,10 @@ public class KafkaProducerWithCustomSerdesApp {
                 producerConfig,
                 new StringSerializer(),
                 new GenericSerializer<Person>());
-
-
-        LOGGER.info("start");
-
         try {
 
             for (int i = 0; ; i++) {
-                Person person = PersonFactory.getPerson(i);
+                Person person = Person.apply(i);
                 ProducerRecord<String, Person> record = new ProducerRecord<>(outputTopic, Integer.valueOf(i).toString(), person);
                 producer.send(record);
                 if (i % 11 == 0) {
@@ -42,7 +37,6 @@ public class KafkaProducerWithCustomSerdesApp {
                     Thread.sleep(1500);
                 }
             }
-
         }
         catch (Exception e) {
             LOGGER.error("Some error occurred during sending", e);
