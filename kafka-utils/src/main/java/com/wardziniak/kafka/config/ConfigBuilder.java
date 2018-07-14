@@ -1,4 +1,4 @@
-package com.wardziniak.kafka.scala.config;
+package com.wardziniak.kafka.config;
 
 import java.util.Optional;
 import java.util.Properties;

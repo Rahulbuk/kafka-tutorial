@@ -2,6 +2,7 @@ package com.wardziniak.kafka.scala.config
 
 import java.util.Properties
 
+import com.wardziniak.kafka.config.ConfigBuilder
 import org.apache.kafka.clients.consumer.ConsumerConfig
 import org.apache.kafka.common.serialization.StringDeserializer
 

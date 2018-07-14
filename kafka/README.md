@@ -39,3 +39,6 @@ docker run -it --rm wurstmeister/kafka:1.1.0 /opt/kafka/bin/kafka-topics.sh \
  --zookeeper ${HOST_NAME}:2181 --replication-factor 1 --partitions 1 --create --topic people
 
 
+docker run -it --rm wurstmeister/kafka:1.1.0 /opt/kafka/bin/kafka-console-producer.sh \
+ --broker-list ${HOST_NAME}:9092 --topic people \
+ --property "parse.key=true" --property "key.separator=:"
