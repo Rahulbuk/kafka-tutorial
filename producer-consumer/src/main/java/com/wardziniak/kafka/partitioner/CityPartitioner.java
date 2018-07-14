@@ -1,6 +1,6 @@
 package com.wardziniak.kafka.partitioner;
 
-import com.wardziniak.kafka.model.Person;
+import com.wardziniak.kafka.utils.model.Person;
 import org.apache.kafka.clients.producer.Partitioner;
 import org.apache.kafka.common.Cluster;
 
@@ -16,7 +16,7 @@ public class CityPartitioner implements Partitioner {
         if (value instanceof Person)
         {
             Person person = (Person)value;
-            return person.getAddress().getCity().hashCode() % cluster.partitionCountForTopic(topic);
+            return person.address().city().hashCode() % cluster.partitionCountForTopic(topic);
         }
         else
             return key.hashCode() % cluster.partitionCountForTopic(topic);
