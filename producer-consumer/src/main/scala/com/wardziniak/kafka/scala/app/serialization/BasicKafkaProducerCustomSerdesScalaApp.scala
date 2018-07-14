@@ -20,7 +20,7 @@ object BasicKafkaProducerCustomSerdesScalaApp extends App with LazyLogging {
 
   private def createPersonRecord(id: Int): ProducerRecord[String, Person] = {
     Thread.sleep(Math.abs(rand.nextLong()%100 * 10))
-    val record = new ProducerRecord[String, Person](OutputTopic, id.toString, Person(id))
+    val record = new ProducerRecord[String, Person](PeopleTopic, id.toString, Person(id))
     logger.info(s"$record")
     record
   }
