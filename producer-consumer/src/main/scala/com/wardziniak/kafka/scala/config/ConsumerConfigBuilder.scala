@@ -8,7 +8,7 @@ import org.apache.kafka.common.serialization.StringDeserializer
 
 case class ConsumerConfigBuilder(
   bootstrapServer: String = "localhost:9092",
-  groupId: String = "group1",
+  groupId: String = "group2",
   autoOffsetReset: String = "earliest",
   keyDeserializer: String = classOf[StringDeserializer].getCanonicalName,
   valueDeserializer: String = classOf[StringDeserializer].getCanonicalName
