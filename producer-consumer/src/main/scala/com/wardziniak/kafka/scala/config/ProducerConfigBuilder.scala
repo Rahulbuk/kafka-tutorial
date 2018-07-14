@@ -2,7 +2,6 @@ package com.wardziniak.kafka.scala.config
 
 import java.util.Properties
 
-import com.wardziniak.kafka.config.ConfigBuilder
 import org.apache.kafka.clients.producer.internals.DefaultPartitioner
 import org.apache.kafka.clients.producer.{Partitioner, ProducerConfig}
 import org.apache.kafka.common.serialization.StringSerializer
