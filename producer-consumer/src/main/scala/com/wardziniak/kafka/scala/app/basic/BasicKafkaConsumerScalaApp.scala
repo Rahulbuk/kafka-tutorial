@@ -3,18 +3,19 @@ package com.wardziniak.kafka.scala.app.basic
 import java.util.Collections
 
 import com.typesafe.scalalogging.LazyLogging
-import com.wardziniak.kafka.config.ConsumerConfigBuilder
 import org.apache.kafka.clients.consumer.KafkaConsumer
-import com.wardziniak.kafka.scala.app._
+import com.wardziniak.kafka.utils._
+import com.wardziniak.kafka.scala.config.ConsumerConfigBuilder
 
 import scala.collection.JavaConverters._
 
 object BasicKafkaConsumerScalaApp extends App with LazyLogging {
 
+  val Topic = BasicTopic
 
-  val consumerConfig = new ConsumerConfigBuilder().buildConfig
+  val consumerConfig = ConsumerConfigBuilder().buildConfig
   val consumer = new KafkaConsumer[String, String](consumerConfig)
-  consumer.subscribe(Collections.singletonList(BasicTopic))
+  consumer.subscribe(Collections.singletonList(Topic))
 
   while (true) {
     val records = consumer.poll(Timeout)

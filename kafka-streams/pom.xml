@@ -22,10 +22,25 @@
   </properties>
 
   <dependencies>
-    <!--<dependency>-->
-      <!--<groupId>com.wardziniak.kafka</groupId>-->
-      <!--<artifactId>kafka-utils</artifactId>-->
-    <!--</dependency>-->
+    <dependency>
+      <groupId>com.wardziniak.kafka</groupId>
+      <artifactId>kafka-utils</artifactId>
+    </dependency>
+
+    <!-- Scala -->
+    <dependency>
+      <groupId>org.scala-lang</groupId>
+      <artifactId>scala-library</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.typesafe.scala-logging</groupId>
+      <artifactId>scala-logging_2.12</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>ch.qos.logback</groupId>
+      <artifactId>logback-classic</artifactId>
+    </dependency>
+
     <dependency>
       <groupId>org.apache.kafka</groupId>
       <artifactId>kafka-streams</artifactId>

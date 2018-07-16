@@ -1,7 +1,7 @@
 package com.wardziniak.kafka.scala.app.serialization
 
 import com.typesafe.scalalogging.LazyLogging
-import com.wardziniak.kafka.scala.app._
+import com.wardziniak.kafka.utils._
 import com.wardziniak.kafka.scala.config.ProducerConfigBuilder
 import com.wardziniak.kafka.utils.model.Person
 import com.wardziniak.kafka.utils.serialization.GenericSerializer

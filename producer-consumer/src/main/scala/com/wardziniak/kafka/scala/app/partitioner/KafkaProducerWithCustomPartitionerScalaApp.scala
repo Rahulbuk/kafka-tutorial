@@ -1,7 +1,7 @@
 package com.wardziniak.kafka.scala.app.partitioner
 
 import com.typesafe.scalalogging.LazyLogging
-import com.wardziniak.kafka.scala.app.PeopleTopic
+import com.wardziniak.kafka.utils._
 import com.wardziniak.kafka.scala.config.ProducerConfigBuilder
 import com.wardziniak.kafka.scala.partitioner.CityPartitioner
 import com.wardziniak.kafka.utils.model.Person
