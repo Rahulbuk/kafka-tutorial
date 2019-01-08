@@ -1,0 +1,62 @@
+
+export HOST_NAME=`ifconfig | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -v '127.0.0.1' | head -1 | tr -s ' ' ' ' | cut -f2 -d" "`
+
+docker-compose up
+
+
+BASICS
+
+Create topic:
+
+export HOST_NAME=`ifconfig | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -v '127.0.0.1' | head -1 | tr -s ' ' ' ' | cut -f2 -d" "`
+
+docker run -it --rm wurstmeister/kafka:1.1.0 /opt/kafka/bin/kafka-topics.sh  \
+--zookeeper ${HOST_NAME}:2181 \
+--replication-factor 3 --partitions 1 \
+--create --topic topic-rep2-part1
+
+
+Topic details:
+docker run -it --rm wurstmeister/kafka:1.1.0 /opt/kafka/bin/kafka-topics.sh  \
+--zookeeper ${HOST_NAME}:2181 \
+--topic topic-rep2-part1 --describe
+
+Send messages:
+
+docker run -it --rm wurstmeister/kafka:1.1.0 /opt/kafka/bin/kafka-console-producer.sh  \
+--broker-list ${HOST_NAME}:9092 --topic topic-rep2-part1
+
+Read messages:
+
+docker run -it --rm wurstmeister/kafka:1.1.0 /opt/kafka/bin/kafka-console-consumer.sh  \
+--bootstrap-server ${HOST_NAME}:9092 --from-beginning --topic topic-rep2-part1
+
+
+
+
+PARTITIONS
+
+export HOST_NAME=`ifconfig | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -v '127.0.0.1' | head -1 | tr -s ' ' ' ' | cut -f2 -d" "`
+
+docker run -it --rm wurstmeister/kafka:1.1.0 /opt/kafka/bin/kafka-topics.sh  \
+--zookeeper ${HOST_NAME}:2181 \
+--replication-factor 1 --partitions 3 \
+--create --topic topic-rep1-part3
+
+
+Send messages:
+
+docker run -it --rm wurstmeister/kafka:1.1.0 /opt/kafka/bin/kafka-console-producer.sh  \
+--broker-list ${HOST_NAME}:9092 --topic topic-rep1-part3
+
+
+Read Messages with consumers from different groups:
+
+docker run -it --rm wurstmeister/kafka:1.1.0 /opt/kafka/bin/kafka-console-consumer.sh  \
+--bootstrap-server ${HOST_NAME}:9092 --from-beginning --topic topic-rep1-part3 --group group1
+
+docker run -it --rm wurstmeister/kafka:1.1.0 /opt/kafka/bin/kafka-console-consumer.sh  \
+--bootstrap-server ${HOST_NAME}:9092 --from-beginning --topic topic-rep1-part3 --group group2
+
+
+
