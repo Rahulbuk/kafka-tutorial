@@ -15,7 +15,9 @@ docker run -it --rm wurstmeister/kafka:1.1.0 /opt/kafka/bin/kafka-topics.sh \
  --zookeeper ${HOST_NAME}:2181 --replication-factor 1 --partitions 1 --create --topic test1 \
  --config retention.ms=30000 --config segment.bytes=200
 
-
+docker run -it --rm wurstmeister/kafka:1.1.0 /opt/kafka/bin/kafka-console-consumer.sh \
+ --bootstrap-server dev-macod-brokers.imshealthcloud.net:9626 \
+ --topic nuke-test.configuration --from-beginning
 
 
 docker run -it --rm wurstmeister/kafka:1.1.0 /opt/kafka/bin/kafka-topics.sh \

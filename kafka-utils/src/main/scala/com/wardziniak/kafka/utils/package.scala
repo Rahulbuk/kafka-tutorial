@@ -4,5 +4,5 @@ package object utils {
 
   val BasicTopic = "basic"
   val PeopleTopic = "people"
-  val Timeout = 10000
+  val Timeout = 1000
 }

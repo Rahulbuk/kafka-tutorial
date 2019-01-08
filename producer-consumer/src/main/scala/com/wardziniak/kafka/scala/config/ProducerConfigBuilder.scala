@@ -4,7 +4,7 @@ import java.util.Properties
 
 import org.apache.kafka.clients.producer.internals.DefaultPartitioner
 import org.apache.kafka.clients.producer.{Partitioner, ProducerConfig}
-import org.apache.kafka.common.serialization.StringSerializer
+import org.apache.kafka.common.serialization.{BytesSerializer, StringSerializer}
 
 case class ProducerConfigBuilder(
   bootstrapServer: String = "localhost:9092",
@@ -19,6 +19,8 @@ case class ProducerConfigBuilder(
     properties.setProperty(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServer)
     properties.setProperty(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, keySerializer)
     properties.setProperty(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, valueSerializer)
+//    properties.setProperty(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, classOf[BytesSerializer].getCanonicalName)
+//    properties.setProperty(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, classOf[BytesSerializer].getCanonicalName)
     properties.setProperty(ProducerConfig.PARTITIONER_CLASS_CONFIG, partitioner.getClass.getCanonicalName)
     properties
   }
